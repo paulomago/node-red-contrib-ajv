@@ -16,7 +16,7 @@
   ],
   "node-red": {
     "nodes": {
-      "swagger validator": "swagger validator.js"
+      "swagger validator": "swagger-validator.js"
     }
   },
   "maintainers": [

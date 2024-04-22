@@ -1,7 +1,7 @@
 <script type="text/javascript">
   RED.nodes.registerType('swagger validator',{
       category: 'function',
-      color: '#a6bbcf',
+      color: '#47A427',
       defaults: {
           name: { value: "" },
           schema: { value: "", required: true }
@@ -17,11 +17,15 @@
           type:"json",
           types:["json"]
         });
+      },
+      icon: "icon.svg",
+      label: function () {
+          return this.name || "Swagger Validator";
       }
   });
 </script>
 
-<script type="text/html" data-template-name="swagger validator">
+<script type="text/html" data-template-name="swagger-validator">
   <div class="form-row">
       <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
       <input type="text" id="node-input-name" placeholder="Name">
@@ -32,6 +36,6 @@
 </div>
 </script>
 
-<script type="text/html" data-help-name="swagger validator">
+<script type="text/html" data-help-name="swagger-validator">
   <p>A simple node that validate swaggers files</p>
 </script>
