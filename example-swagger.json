@@ -1,0 +1,179 @@
+  {
+    "type": "object",
+    "properties": {
+      "data": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "creditCardAccountId": {
+              "type": "string",
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "brandName": {
+              "type": "string",
+              "pattern": "[\\w\\W\\s]*",
+              "maxLength": 80
+            },
+            "companyCnpj": {
+              "type": "string",
+              "pattern": "^\\d{14}$",
+              "maxLength": 14
+            },
+            "name": {
+              "type": "string",
+              "pattern": "[\\w\\W\\s]*",
+              "maxLength": 50
+            },
+            "productType": {
+              "type": "string",
+              "enum": [
+                "CLASSIC_NACIONAL", 
+                "CLASSIC_INTERNACIONAL", 
+                "GOLD", 
+                "PLATINUM", 
+                "INFINITE", 
+                "ELECTRON", 
+                "STANDARD_NACIONAL", 
+                "STANDARD_INTERNACIONAL", 
+                "ELETRONIC", 
+                "BLACK", 
+                "REDESHOP", 
+                "MAESTRO_MASTERCARD_MAESTRO", 
+                "GREEN", 
+                "BLUE", 
+                "BLUEBOX", 
+                "PROFISSIONAL_LIBERAL", 
+                "CHEQUE_ELETRONICO", 
+                "CORPORATIVO", 
+                "EMPRESARIAL", 
+                "COMPRAS", 
+                "BASICO_NACIONAL", 
+                "BASICO_INTERNACIONAL", 
+                "NANQUIM", 
+                "GRAFITE", 
+                "MAIS", 
+                "OUTROS"
+              ]
+            },
+            "productAdditionalInfo": {
+              "type": "string",
+              "pattern": "[\\w\\W\\s]*",
+              "maxLength": 50
+            },
+            "creditCardNetwork": {
+              "type": "string",
+              "enum": [
+                "VISA", 
+                "MASTERCARD", 
+                "AMERICAN_EXPRESS", 
+                "DINERS_CLUB", 
+                "HIPERCARD", 
+                "BANDEIRA_PROPRIA", 
+                "CHEQUE_ELETRONICO", 
+                "ELO", 
+                "OUTRAS"
+              ]
+            },
+            "networkAdditionalInfo": {
+              "type": "string",
+              "pattern": "[\\w\\W\\s]*",
+              "maxLength": 50
+            }
+          },
+          "required": [
+            "creditCardAccountId",
+            "brandName",
+            "companyCnpj",
+            "name",
+            "productType",
+            "creditCardNetwork"
+          ],
+          "allOf": [
+            {
+                "if": {
+                  "properties": {
+                    "productType": { "const": "OUTROS" }
+                  }
+                },
+                "then": {
+                  "required": ["productAdditionalInfo"]
+                }
+            },
+            {
+                "if": {
+                  "properties": {
+                    "creditCardNetwork": { "const": "OUTROS" }
+                  }
+                },
+                "then": {
+                  "required": ["networkAdditionalInfo"]
+                }
+            }
+          ]
+          }
+        ]
+        },
+        "links": {
+        "type": "object",
+        "properties": {
+          "self": {
+            "type": "string",
+            "maxLength": 2000,
+            "pattern": "^(https:\/\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&\/\/=]*)$"
+          },
+          "first": {
+            "type": "string",
+            "maxLength": 2000,
+            "pattern": "^(https:\/\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&\/\/=]*)$"
+          },
+          "prev": {
+            "type": "string",
+            "maxLength": 2000,
+            "pattern": "^(https:\/\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&\/\/=]*)$"
+          },
+          "next": {
+            "type": "string",
+            "maxLength": 2000,
+            "pattern": "^(https:\/\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&\/\/=]*)$"
+          },
+          "last": {
+            "type": "string",
+            "maxLength": 2000,
+            "pattern": "^(https:\/\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\\+.~#?&\/\/=]*)$"
+          }
+        },
+        "required": [
+          "self"
+        ]
+      },
+      "meta": {
+      "type": "object",
+      "properties": {
+        "totalRecords": {
+        "type": "integer"
+        },
+        "totalPages": {
+        "type": "integer"
+        },
+        "requestDateTime": {
+        "type": "string",
+        "maxLength": 20
+        }
+      },
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ]
+      }
+    },
+    "required": [
+      "data",
+      "links",
+      "meta"
+    ]
+  }
